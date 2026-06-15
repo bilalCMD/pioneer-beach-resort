@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery | Pioneer Beach RV Resort</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+<div id="page-gallery" class="page-section active"><div class="page-hero"><div class="ph-inner"><span class="section-label">Photos</span><h1>See It for Yourself</h1><p>Real moments from Pioneer Beach RV Resort</p></div></div><section class="section"><div class="container"><div class="gallery-filter fade-up"><button class="filter-btn active" onclick="filterGallery('all',this)">All</button><button class="filter-btn" onclick="filterGallery('events',this)">Events</button><button class="filter-btn" onclick="filterGallery('beach',this)">Beach</button><button class="filter-btn" onclick="filterGallery('activities',this)">Activities</button><button class="filter-btn" onclick="filterGallery('local',this)">Local</button></div>
+<div class="gallery-masonry" id="galleryGrid">
+<div class="gallery-item" data-cat="events" onclick="openLightbox('img1','St Patricks Day')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="stpat" alt=""><span class="g-plus">+</span><span class="g-caption">St. Patrick's Day</span></div>
+<div class="gallery-item" data-cat="beach" onclick="openLightbox('img2','Beach day')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="boardwalk_beach" alt=""><span class="g-plus">+</span><span class="g-caption">Beach Day</span></div>
+<div class="gallery-item" data-cat="events" onclick="openLightbox('img3','Kite Festival')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="kite" alt=""><span class="g-plus">+</span><span class="g-caption">Kite Festival</span></div>
+<div class="gallery-item" data-cat="local" onclick="openLightbox('img4','Belt Sander Racing')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="park_pond" alt=""><span class="g-plus">+</span><span class="g-caption">Belt Sander Racing</span></div>
+<div class="gallery-item" data-cat="events" onclick="openLightbox('img5','Easter')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="egrets" alt=""><span class="g-plus">+</span><span class="g-caption">Easter Weekend</span></div>
+<div class="gallery-item" data-cat="events" onclick="openLightbox('img6','Awards')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="sunset_wide" alt=""><span class="g-plus">+</span><span class="g-caption">Sunset on the Gulf</span></div>
+<div class="gallery-item" data-cat="local" onclick="openLightbox('img7','The Gaff')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="sunset_ships" alt=""><span class="g-plus">+</span><span class="g-caption">Resort Wetlands</span></div>
+<div class="gallery-item" data-cat="activities" onclick="openLightbox('img8','Breakfast')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="potluck" alt=""><span class="g-plus">+</span><span class="g-caption">RV Living</span></div>
+<div class="gallery-item" data-cat="activities" onclick="openLightbox('img9','Family')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="aerial" alt=""><span class="g-plus">+</span><span class="g-caption">Family Time</span></div>
+<div class="gallery-item" data-cat="activities" onclick="openLightbox('img10','Crafts')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="moorhen" alt=""><span class="g-plus">+</span><span class="g-caption">Wildlife & Egrets</span></div>
+<div class="gallery-item" data-cat="beach" onclick="openLightbox('img11','Sunset')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="park_gulf" alt=""><span class="g-plus">+</span><span class="g-caption">Golden Hour</span></div>
+<div class="gallery-item" data-cat="beach" onclick="openLightbox('img12','Pioneer Beach')"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='3'%3E%3C/svg%3E" data-img="park_dusk" alt=""><span class="g-plus">+</span><span class="g-caption">Pioneer Beach</span></div>
+</div></div></section><section class="cta-band" data-bg="sunset_wide"><div class="cta-inner"><span class="sc-eyebrow">Reserve Your Spot</span><h2>Your Gulf Coast Escape Awaits</h2><p>Book direct on CampSpot or call our team — beachfront sites and cottages fill up fast in season.</p><div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.7rem"><a class="btn btn-red" href="https://www.campspot.com/book/pioneer-beach-tx" target="_blank" rel="noopener">Book on CampSpot</a><a class="btn btn-ghost-light" href="tel:18884803246">Call 1-888-480-3246</a></div></div></section></div>
+
+<div id="site-footer"></div>
+<script src="assets/img-data.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>
