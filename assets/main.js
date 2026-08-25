@@ -25,11 +25,23 @@ async function loadComponent(id, url){
     if(!res.ok) throw new Error(res.status);
     host.innerHTML = await res.text();
     highlightActiveNav();
+    syncHeaderOffset();
     if(window.iconify) window.iconify(host);
   }catch(err){
     console.warn('Component "' + url + '" could not be loaded. ' +
       'Serve the site through a local server (Live Server / python -m http.server).', err);
   }
+}
+
+/* The header partial renders an in-flow banner above the fixed navbar, so a
+   100vh hero always hung that many pixels below the fold (and took the
+   "Scroll to Explore" cue with it). Publish the banner's real height as a
+   custom property and let the hero subtract it. */
+function syncHeaderOffset(){
+  const host = document.getElementById('site-header');
+  if(!host) return;
+  const h = Math.round(host.getBoundingClientRect().height);
+  document.documentElement.style.setProperty('--hdr-static', h + 'px');
 }
 
 /* Add an "active" state to the nav item matching the current page. */
@@ -96,6 +108,7 @@ function initScrollFx(){
       ticking = false;
     });
   }
+  window.addEventListener('resize', syncHeaderOffset, {passive:true});
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
 }
