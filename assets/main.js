@@ -13,7 +13,13 @@
 /* Bump on deploy so browsers pick up new partials instead of a cached copy. */
 const ASSET_V='20260827a';
 
-function pageUrl(p){ return (p === 'home' || !p) ? 'index.html' : p + '.html'; }
+function pageUrl(p){ return (p === 'home' || !p) ? '/' : '/' + p; }
+
+/* Current page slug, tolerant of both /amenities and /amenities.html. */
+function currentSlug(){
+  const seg = (location.pathname.replace(/\/+$/,'').split('/').pop() || '').toLowerCase();
+  return seg.replace(/\.html$/,'') || 'home';
+}
 
 /* Navigate to a real page. Replaces the old SPA show/hide logic
    so every existing onclick="showPage('x')" now just works. */
@@ -49,11 +55,11 @@ function syncHeaderOffset(){
 
 /* Add an "active" state to the nav item matching the current page. */
 function highlightActiveNav(){
-  const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const here = currentSlug();
   document.querySelectorAll('#navbar a, .mobile-nav a').forEach(a=>{
     const oc = a.getAttribute('onclick') || '';
     const m = oc.match(/showPage\('([^']*)'\)/);
-    if(m && pageUrl(m[1]).toLowerCase() === here) a.classList.add('current');
+    if(m && (m[1] || 'home').toLowerCase() === here) a.classList.add('current');
   });
 }
 

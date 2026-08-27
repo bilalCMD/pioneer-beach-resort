@@ -1,0 +1,24 @@
+# Pioneer Beach RV Resort — clean URLs (/amenities instead of /amenities.html)
+
+Options -MultiViews
+RewriteEngine On
+
+# partials/ is fetched by main.js at runtime; leave those requests alone.
+RewriteRule ^partials/ - [L]
+
+# Send any direct .html request to its clean URL, once, so visitors and
+# search engines settle on one address. REDIRECT_STATUS stops the rule
+# firing again on requests we have already rewritten internally.
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+RewriteRule ^ / [R=301,L]
+
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Serve the underlying .html file for a clean URL.
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
