@@ -1175,3 +1175,50 @@ img,svg,video,iframe{max-width:100%}
 .rv-cta-btn svg{flex-shrink:0;transition:transform .3s}
 .rv-cta-btn:hover svg{transform:translateX(3px)}
 @media(max-width:880px){.rv-cta-btn{margin-top:1.5rem}}
+
+
+/* ============================================================
+   FEATURE CARDS + CHIPS
+   Headline points get real photography; the utility features that
+   have no photograph stay as compact chips rather than pretending.
+   ============================================================ */
+.feat-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-top:1.9rem}
+.feat-card{position:relative;border-radius:16px;overflow:hidden;background:var(--g100);
+  box-shadow:0 12px 30px -16px rgba(20,20,20,.4);
+  transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s}
+.feat-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -20px rgba(20,20,20,.5)}
+.feat-card img{width:100%;height:150px;object-fit:cover;display:block;
+  transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.feat-card:hover img{transform:scale(1.06)}
+.feat-card::after{content:'';position:absolute;left:0;right:0;top:0;height:150px;pointer-events:none;
+  background:linear-gradient(to top,rgba(10,22,38,.5),rgba(10,22,38,0) 55%)}
+.feat-body{background:#fff;padding:.95rem 1rem 1.05rem;border:1px solid var(--g200);border-top:none;
+  border-radius:0 0 16px 16px}
+.feat-body h4{font-family:'Product Sans',sans-serif;font-weight:700;font-size:.92rem;
+  color:var(--black);margin-bottom:.3rem;letter-spacing:-.01em}
+.feat-body p{font-family:'Product Sans',sans-serif;font-size:.79rem;line-height:1.5;color:var(--g500)}
+
+.feat-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem;list-style:none;padding:0}
+.feat-chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--tint);
+  border:1px solid rgba(237,31,36,.14);border-radius:100px;padding:.5rem .95rem;
+  font-family:'Product Sans',sans-serif;font-size:.8rem;color:var(--g700);
+  transition:background .3s,border-color .3s,color .3s}
+.feat-chip:hover{background:#fff;border-color:rgba(237,31,36,.4);color:var(--black)}
+.fc-ico{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;
+  color:var(--red);flex-shrink:0}
+.fc-ico .ico-svg{display:flex;width:18px;height:18px}
+.fc-ico svg{width:18px;height:18px;stroke-width:1.8}
+
+@media(max-width:880px){
+  .feat-cards{grid-template-columns:1fr 1fr}
+  .feat-cards article:last-child{grid-column:span 2}
+  .feat-card img{height:135px}
+}
+@media(max-width:520px){
+  .feat-cards{grid-template-columns:1fr}
+  .feat-cards article:last-child{grid-column:span 1}
+  .feat-card img{height:150px}
+  .feat-chip{font-size:.76rem;padding:.45rem .8rem}
+}
+
+.cottages-chips{margin-top:1.7rem}
