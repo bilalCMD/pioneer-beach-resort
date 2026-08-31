@@ -1264,3 +1264,6 @@ img,svg,video,iframe{max-width:100%}
    made its initial invisible has to go too. */
 .testi-avatar{background:var(--tint);color:var(--red);border:1px solid rgba(237,31,36,.18)}
 .testi-card.active .testi-avatar{background:var(--red)!important;color:#fff;border-color:transparent}
+
+/* Honeypot: off-screen for people, irresistible to bots. */
+.hp-field{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0;pointer-events:none}

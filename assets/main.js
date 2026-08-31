@@ -79,6 +79,34 @@ function switchExplore(t,b){document.querySelectorAll('.explore-tab').forEach(x=
 let calDate=new Date(2026,3,1);const calEv=[7,12,18,19,25,26];
 function renderCalendar(){const g=document.getElementById('calGrid'),l=document.getElementById('calMonthLabel');if(!g||!l)return;const m=['January','February','March','April','May','June','July','August','September','October','November','December'];l.textContent=m[calDate.getMonth()]+' '+calDate.getFullYear();const f=new Date(calDate.getFullYear(),calDate.getMonth(),1).getDay(),d=new Date(calDate.getFullYear(),calDate.getMonth()+1,0).getDate(),t=new Date();let h=['S','M','T','W','T','F','S'].map(x=>'<div class="cal-day-header">'+x+'</div>').join('');for(let i=0;i<f;i++)h+='<div class="cal-day empty"></div>';for(let i=1;i<=d;i++){const isT=i===t.getDate()&&calDate.getMonth()===t.getMonth()&&calDate.getFullYear()===t.getFullYear();h+='<div class="cal-day'+(isT?' today':'')+(calEv.includes(i)?' has-event':'')+'">'+i+'</div>'}g.innerHTML=h}
 function changeMonth(d){calDate.setMonth(calDate.getMonth()+d);renderCalendar()}
+/* Post a form to the PHP handler without leaving the page.
+   Used by the contact form and the footer newsletter signup. */
+function submitSiteForm(form, type){
+  const btn = form.querySelector('button[type=submit], button');
+  const label = btn ? btn.innerHTML : '';
+  if(btn){ btn.disabled = true; btn.style.opacity = '.65'; }
+
+  const data = new FormData(form);
+  data.append('form_type', type);
+
+  fetch('/form-handler.php', { method:'POST', body:data })
+    .then(r => r.json().catch(()=>({ok:r.ok})))
+    .then(res => {
+      if(res && res.ok){
+        form.reset();
+        showToast(type === 'newsletter'
+          ? 'Thanks for subscribing!'
+          : 'Thanks! We will reply within 24 hours.');
+      } else {
+        showToast((res && res.error) || 'Sorry, that could not be sent. Please call 1-888-480-3246.');
+      }
+    })
+    .catch(() => showToast('Sorry, that could not be sent. Please call 1-888-480-3246.'))
+    .finally(() => { if(btn){ btn.disabled = false; btn.style.opacity = ''; btn.innerHTML = label; } });
+
+  return false;   // never let the browser navigate
+}
+
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000)}
 
 // TESTIMONIAL SLIDER

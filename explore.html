@@ -35,9 +35,9 @@
           <span class="cu2-qico">📞</span>
           <div class="cu2-qtext"><h4>Call Us</h4><p>888-480-3246</p><span class="cu2-qsub">Toll Free · 9am–5pm</span></div>
         </a>
-        <a class="cu2-qcard" href="mailto:info@pioneerresorts.com">
+        <a class="cu2-qcard" href="mailto:info@pioneerbeachresort.com">
           <span class="cu2-qico">✉️</span>
-          <div class="cu2-qtext"><h4>Email Us</h4><p>info@pioneerresorts.com</p><span class="cu2-qsub">Replies within 24 hrs</span></div>
+          <div class="cu2-qtext"><h4>Email Us</h4><p>info@pioneerbeachresort.com</p><span class="cu2-qsub">Replies within 24 hrs</span></div>
         </a>
         <a class="cu2-qcard" href="https://maps.google.com/?q=120+Gulfwind+Drive+Port+Aransas+TX+78373" target="_blank" rel="noopener">
           <span class="cu2-qico">📍</span>
@@ -47,23 +47,26 @@
 
       <div class="cu2-main fade-up">
         <div class="cu2-formcard">
-          <span class="cu2-eyeb">Send a Message</span>
-          <h2>Plan your stay</h2>
-          <p class="cu2-sub">Fill out the form and our team will get back to you within 24 hours.</p>
-          <div class="cu-row">
-            <div class="cu-field"><label>First Name*</label><input placeholder="First name"></div>
-            <div class="cu-field"><label>Last Name*</label><input placeholder="Last name"></div>
-          </div>
-          <div class="cu-row">
-            <div class="cu-field"><label>Email*</label><input type="email" placeholder="you@email.com"></div>
-            <div class="cu-field"><label>Phone</label><input type="tel" placeholder="(555) 555-5555"></div>
-          </div>
-          <div class="cu-field"><label>Inquiry</label>
-            <select><option>RV Site</option><option>Beach Cottage</option><option>Group / Event</option><option>General Question</option></select>
-          </div>
-          <div class="cu-field cu-grow"><label>Message*</label><textarea placeholder="Tell us about your trip..."></textarea></div>
-          <button class="cu-send" onclick="showToast('Thanks! We will reply within 24 hours.')">Send Message <span class="cu-arr">→</span></button>
-        </div>
+<span class="cu2-eyeb">Send a Message</span>
+<h2>Plan your stay</h2>
+<p class="cu2-sub">Fill out the form and our team will get back to you within 24 hours.</p>
+<form class="cu-form" onsubmit="return submitSiteForm(this,'contact')">
+<input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="cu-row">
+<div class="cu-field"><label for="cf-first">First Name*</label><input id="cf-first" name="first_name" required placeholder="First name"></div>
+<div class="cu-field"><label for="cf-last">Last Name*</label><input id="cf-last" name="last_name" required placeholder="Last name"></div>
+</div>
+<div class="cu-row">
+<div class="cu-field"><label for="cf-email">Email*</label><input id="cf-email" name="email" type="email" required placeholder="you@email.com"></div>
+<div class="cu-field"><label for="cf-phone">Phone</label><input id="cf-phone" name="phone" type="tel" placeholder="(555) 555-5555"></div>
+</div>
+<div class="cu-field"><label for="cf-inquiry">Inquiry</label>
+<select id="cf-inquiry" name="inquiry"><option>RV Site</option><option>Beach Cottage</option><option>Group / Event</option><option>General Question</option></select>
+</div>
+<div class="cu-field cu-grow"><label for="cf-msg">Message*</label><textarea id="cf-msg" name="message" required placeholder="Tell us about your trip..."></textarea></div>
+<button class="cu-send" type="submit">Send Message <span class="cu-arr">→</span></button>
+</form>
+</div>
 
         <aside class="cu2-side">
           <div class="cu2-detailcard">

@@ -8,8 +8,7 @@
       </div>
       <div class="footer-block fnl">
         <h4>Stay in the loop</h4>
-        <form class="fnl-form" onsubmit="showToast('Thanks for subscribing!');return false;">
-          <input type="email" required placeholder="Your e-mail" aria-label="Email address">
+        <form class="fnl-form" onsubmit="return submitSiteForm(this,'newsletter')"><input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><input type="email" name="email" required placeholder="Your e-mail" aria-label="Email address">
           <button type="submit">Subscribe</button>
         </form>
       </div>
