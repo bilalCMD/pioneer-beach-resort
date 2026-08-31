@@ -6,10 +6,15 @@
  */
 declare(strict_types=1);
 
-$TO    = 'Info@pioneerbeachresort.com';
-$CC    = 'altafbilal649@gmail.com';
-$SITE  = 'Pioneer Beach RV Resort';
-$PHONE = '1-888-480-3246';
+$CFG   = require __DIR__ . '/form-config.php';
+require_once __DIR__ . '/smtp.php';
+
+$TO    = $CFG['to'];
+$CC    = $CFG['cc'];
+$SITE  = $CFG['site'];
+$PHONE = $CFG['phone'];
+
+$EOL = "\r\n";
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -138,23 +143,45 @@ $plain .= "\nReceived: {$received}\n";
 $boundary = 'pbr' . bin2hex(random_bytes(8));
 $host     = preg_replace('/[^a-z0-9.\-]/i', '', (string)($_SERVER['HTTP_HOST'] ?? 'pioneerbeachresort.com'));
 
-$headers = implode("\r\n", [
-    'From: ' . $SITE . ' Website <no-reply@' . $host . '>',
-    'Cc: ' . $CC,
-    'Reply-To: ' . $replyTo,
-    'MIME-Version: 1.0',
-    'Content-Type: multipart/alternative; boundary="' . $boundary . '"',
-]);
+$mimeHeaders = 'Reply-To: ' . $replyTo . $EOL
+             . 'MIME-Version: 1.0' . $EOL
+             . 'Content-Type: multipart/alternative; boundary="' . $boundary . '"';
 
-$body = "--{$boundary}\r\n"
-      . "Content-Type: text/plain; charset=utf-8\r\n\r\n{$plain}\r\n\r\n"
-      . "--{$boundary}\r\n"
-      . "Content-Type: text/html; charset=utf-8\r\n\r\n{$html}\r\n\r\n"
-      . "--{$boundary}--";
+/* mail() needs From/Cc in the header blob; the SMTP path writes its own. */
+$headers = 'From: ' . $SITE . ' Website <no-reply@' . $host . '>' . $EOL
+         . 'Cc: ' . $CC . $EOL
+         . $mimeHeaders;
 
-if (@mail($TO, $subject, $body, $headers)) {
+$body = '--' . $boundary . $EOL
+      . 'Content-Type: text/plain; charset=utf-8' . $EOL . $EOL . $plain . $EOL . $EOL
+      . '--' . $boundary . $EOL
+      . 'Content-Type: text/html; charset=utf-8' . $EOL . $EOL . $html . $EOL . $EOL
+      . '--' . $boundary . '--';
+
+/* Keep a copy on disk regardless of what the mail server does, so an
+   enquiry is never lost to a silent delivery failure. */
+@file_put_contents(__DIR__ . '/form-submissions.log',
+    json_encode(['at' => date('c'), 'type' => $type, 'subject' => $subject,
+                 'fields' => $rows, 'message' => $message],
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL,
+    FILE_APPEND | LOCK_EX);
+
+$err  = null;
+$sent = false;
+
+if (!empty($CFG['smtp_user'])) {
+    $sent = smtp_send($CFG, $TO, $CC, $subject, $mimeHeaders, $body, $err);
+} else {
+    $sent = @mail($TO, $subject, $body, $headers);
+    if (!$sent) { $err = 'mail() returned false'; }
+}
+
+if ($sent) {
     echo json_encode(['ok' => true]);
 } else {
+    @file_put_contents(__DIR__ . '/form-submissions.log',
+        json_encode(['at' => date('c'), 'delivery_error' => $err]) . PHP_EOL,
+        FILE_APPEND | LOCK_EX);
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'Sorry, that could not be sent. Please call us on ' . $PHONE . '.']);
 }
