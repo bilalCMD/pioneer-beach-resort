@@ -1,0 +1,90 @@
+{
+  "updated": "2026-10-13",
+  "events": [
+    {
+      "id": "evt_bingo",
+      "kind": "activity",
+      "title": "Weekly Bingo",
+      "recurs": "Every Tuesday",
+      "time": "7:00 PM",
+      "location": "Rec Hall",
+      "description": "Cards on sale from 6:30pm. Cash prizes and a jackpot game to finish.",
+      "image": "",
+      "status": "scheduled",
+      "statusNote": ""
+    },
+    {
+      "id": "evt_dinner",
+      "kind": "activity",
+      "title": "Thursday Night Dinner",
+      "recurs": "Every Thursday",
+      "time": "5:30 PM",
+      "location": "Rec Hall",
+      "description": "A different menu each week, cooked and served by our Winter Texan volunteers.",
+      "image": "",
+      "status": "scheduled",
+      "statusNote": ""
+    },
+    {
+      "id": "evt_pottery",
+      "kind": "activity",
+      "title": "Pottery Class",
+      "recurs": "Every Wednesday",
+      "time": "10:00 AM",
+      "location": "Activity Center",
+      "description": "All materials supplied. Beginners welcome, no need to book ahead.",
+      "image": "",
+      "status": "scheduled",
+      "statusNote": ""
+    },
+    {
+      "id": "evt_halloween",
+      "kind": "event",
+      "title": "Halloween Weekend",
+      "date": "2026-10-31",
+      "time": "4:00 PM",
+      "location": "Pavilion & Activity Center",
+      "description": "Site decorating contest, trick-or-treating around the park and a costume party at the pavilion.",
+      "image": "",
+      "status": "scheduled",
+      "statusNote": ""
+    },
+    {
+      "id": "evt_thanksgiving",
+      "kind": "event",
+      "title": "Thanksgiving Potluck",
+      "date": "2026-11-26",
+      "time": "1:00 PM",
+      "location": "Rec Hall",
+      "description": "Turkey provided by the resort. Bring a dish to share and join your neighbours.",
+      "image": "",
+      "status": "scheduled",
+      "statusNote": ""
+    },
+    {
+      "id": "evt_newyear",
+      "kind": "event",
+      "title": "New Year's Eve Party",
+      "date": "2026-12-31",
+      "time": "8:00 PM",
+      "location": "Rec Hall",
+      "description": "Live music, snacks and a countdown to midnight.",
+      "image": "",
+      "status": "scheduled",
+      "statusNote": ""
+    },
+    {
+      "id": "evt_promo_winter",
+      "kind": "promotion",
+      "title": "Winter Texan Rates",
+      "date": "2026-11-01",
+      "endDate": "2027-03-31",
+      "time": "",
+      "location": "",
+      "description": "Monthly rates for stays of 30 nights or longer through the winter season. Call the office for current availability.",
+      "image": "",
+      "status": "scheduled",
+      "statusNote": ""
+    }
+  ]
+}

@@ -27,3 +27,8 @@ RewriteRule ^(.+?)/?$ $1.html [L]
 <FilesMatch "^(form-config\.php|smtp\.php|form-submissions\.log)$">
   Require all denied
 </FilesMatch>
+
+# Events admin internals must never be served directly.
+<FilesMatch "^(events-config\.php)$">
+  Require all denied
+</FilesMatch>
