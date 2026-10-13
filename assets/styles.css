@@ -1530,3 +1530,10 @@ img,svg,video,iframe{max-width:100%}
   .ev-cal-e{font-size:0;padding:.22rem}
   .ev-cal-e::before{content:'';display:block;height:4px;border-radius:2px;background:#fff}
 }
+
+/* "110/30/50A" is wider than a 320px phone allows in a two-up specs band. */
+@media(max-width:460px){
+  .stay-specs-band{grid-template-columns:1fr;padding:1.5rem 1.2rem;gap:1.2rem}
+  .ss-val{font-size:1.45rem;overflow-wrap:anywhere}
+  .footer-brand,.footer-tagline{max-width:100%;overflow-wrap:anywhere}
+}
