@@ -150,6 +150,84 @@ function initScrollFx(){
   onScroll();
 }
 
+/* Resort feature tiles open their own .rf-detail block in a dialog.
+   The copy lives in the page markup, so nothing is duplicated here. */
+function initFeatureModal(){
+  const tiles = document.querySelectorAll('.rf-tile');
+  if(!tiles.length) return;
+
+  let overlay = document.getElementById('rfModal');
+  if(!overlay){
+    overlay = document.createElement('div');
+    overlay.id = 'rfModal';
+    overlay.className = 'rfm-overlay';
+    overlay.setAttribute('role','dialog');
+    overlay.setAttribute('aria-modal','true');
+    overlay.innerHTML =
+      '<div class="rfm-dialog">' +
+        '<button class="rfm-close" type="button" aria-label="Close">&#10005;</button>' +
+        '<figure class="rfm-figure" hidden><img alt=""></figure>' +
+        '<div class="rfm-body"><span class="rfm-tag" hidden></span><h3></h3>' +
+        '<div class="rfm-content"></div></div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+  }
+
+  const dialog  = overlay.querySelector('.rfm-dialog');
+  const figure  = overlay.querySelector('.rfm-figure');
+  const figImg  = overlay.querySelector('.rfm-figure img');
+  const tagEl   = overlay.querySelector('.rfm-tag');
+  const titleEl = overlay.querySelector('.rfm-body h3');
+  const content = overlay.querySelector('.rfm-content');
+  let lastFocus = null;
+
+  function open(tile){
+    const detail = tile.querySelector('.rf-detail');
+    if(!detail) return;
+    lastFocus = tile;
+
+    const img = tile.querySelector('img');
+    if(img){ figImg.src = img.getAttribute('src'); figImg.alt = img.getAttribute('alt') || ''; figure.hidden = false; }
+    else { figure.hidden = true; figImg.removeAttribute('src'); }
+
+    const tag = tile.querySelector('.rf-tag');
+    if(tag){ tagEl.textContent = tag.textContent; tagEl.hidden = false; }
+    else { tagEl.hidden = true; }
+
+    const h = tile.querySelector('h4');
+    titleEl.innerHTML = h ? h.innerHTML : '';
+    overlay.setAttribute('aria-label', (h ? h.textContent : 'Resort feature').trim());
+    content.innerHTML = detail.innerHTML;
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    dialog.scrollTop = 0;
+    overlay.querySelector('.rfm-close').focus();
+  }
+
+  function close(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if(lastFocus){ lastFocus.focus(); lastFocus = null; }
+  }
+
+  tiles.forEach(t => {
+    t.addEventListener('click', e => {
+      if(e.target.closest('a')) return;      // let real links through
+      open(t);
+    });
+    t.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(t); }
+    });
+  });
+
+  overlay.addEventListener('click', e => { if(e.target === overlay) close(); });
+  overlay.querySelector('.rfm-close').addEventListener('click', close);
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && overlay.classList.contains('open')) close();
+  });
+}
+
 /* Startup: load shared components, then original page init. */
 document.addEventListener('DOMContentLoaded', ()=>{
   loadComponent('site-header', 'partials/header.html?v='+ASSET_V);
@@ -158,6 +236,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   renderCalendar();
   initFadeUps();
   initScrollFx();
+  initFeatureModal();
   // The old SPA revealed the gallery when you navigated to it; with
   // separate pages we trigger it here whenever the gallery is present.
   if(document.querySelector('.gallery-masonry')) setTimeout(revealGallery, 200);
