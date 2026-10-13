@@ -1408,3 +1408,38 @@ img,svg,video,iframe{max-width:100%}
   .gcr-wrap{grid-template-columns:1fr;gap:1.6rem}
   .gcr-media img{height:240px}
 }
+
+/* ---- Cottage cabin types ---- */
+.cab-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.8rem}
+.cab-card{background:#fff;border:1px solid var(--g200);border-radius:16px;padding:1.6rem 1.5rem;
+  transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s}
+.cab-card:hover{transform:translateY(-4px);border-color:transparent;
+  box-shadow:0 20px 42px -22px rgba(20,20,20,.3)}
+.cab-no{display:block;font-family:'Cinzel Decorative','Cinzel',serif;font-size:1.3rem;
+  color:var(--black);line-height:1.2;margin-bottom:.35rem}
+.cab-sleeps{display:inline-block;background:var(--tint);color:var(--red);border-radius:100px;
+  font-family:'Product Sans',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;padding:.3rem .8rem;margin-bottom:.8rem}
+.cab-card p{font-family:'Product Sans',sans-serif;font-size:.88rem;line-height:1.6;color:var(--g700)}
+.cab-notes{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.55rem}
+.cab-notes li{position:relative;padding-left:1.5rem;font-family:'Product Sans',sans-serif;
+  font-size:.88rem;line-height:1.6;color:var(--g700)}
+.cab-notes li::before{content:'';position:absolute;left:.3rem;top:.6rem;width:6px;height:6px;
+  border-radius:50%;background:var(--red)}
+.cab-notes strong{color:var(--black)}
+@media(max-width:620px){.cab-grid{grid-template-columns:1fr}}
+
+/* ---- Golf cart rental card on the contact page ---- */
+.cu2-cartcard{background:#fff;border:1px solid rgba(237,31,36,.18);border-radius:22px;padding:1.6rem}
+.cu2-ctag{display:inline-block;font-family:'Product Sans',sans-serif;font-size:.6rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--red);
+  padding:.3rem .75rem;border-radius:100px;margin-bottom:.7rem}
+.cu2-cartcard h3{font-family:'Cinzel Decorative','Cinzel',serif;font-weight:400;font-size:1.25rem;
+  color:var(--black);margin-bottom:.5rem}
+.cu2-cartcard p{font-family:'Product Sans',sans-serif;font-size:.85rem;line-height:1.6;color:var(--g700)}
+.cu2-cartactions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.1rem}
+.cu2-soon{opacity:.5;pointer-events:none}
+
+/* ---- Things to Do page ---- */
+.ttd-intro{font-family:'Product Sans',sans-serif;font-size:1rem;line-height:1.75;color:var(--g700);
+  max-width:60ch;margin:0 auto 2.4rem;text-align:center}
