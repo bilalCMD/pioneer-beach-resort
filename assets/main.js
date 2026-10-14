@@ -11,7 +11,7 @@
 
 /* Map a page slug to its HTML file. 'home' is index.html. */
 /* Bump on deploy so browsers pick up new partials instead of a cached copy. */
-const ASSET_V='20261013a';
+const ASSET_V='20261014a';
 
 function pageUrl(p){ return (p === 'home' || !p) ? '/' : '/' + p; }
 
@@ -187,7 +187,9 @@ function initFeatureModal(){
     lastFocus = tile;
 
     const img = tile.querySelector('img');
+    const alt = tile.getAttribute('data-modal-img');   // icon tiles can still have a photo
     if(img){ figImg.src = img.getAttribute('src'); figImg.alt = img.getAttribute('alt') || ''; figure.hidden = false; }
+    else if(alt){ figImg.src = alt; figImg.alt = ''; figure.hidden = false; }
     else { figure.hidden = true; figImg.removeAttribute('src'); }
 
     const tag = tile.querySelector('.rf-tag');
