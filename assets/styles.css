@@ -1537,3 +1537,30 @@ img,svg,video,iframe{max-width:100%}
   .ss-val{font-size:1.45rem;overflow-wrap:anywhere}
   .footer-brand,.footer-tagline{max-width:100%;overflow-wrap:anywhere}
 }
+
+
+/* ============================================================
+   RV SITE TYPES
+   (This block was lost when the script that should have appended
+   it exited early; the markup has been live without it.)
+   ============================================================ */
+.sty-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.9rem}
+.sty-card{position:relative;background:#fff;border:1px solid var(--g200);border-radius:16px;
+  padding:1.6rem 1.4rem;display:flex;flex-direction:column;
+  transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s}
+.sty-card:hover{transform:translateY(-4px);border-color:transparent;
+  box-shadow:0 20px 42px -22px rgba(20,20,20,.3)}
+.sty-num{display:block;font-family:'Cinzel Decorative','Cinzel',serif;font-size:1.5rem;
+  color:rgba(237,31,36,.28);line-height:1;margin-bottom:.6rem}
+.sty-card h4{font-family:'Product Sans',sans-serif;font-weight:700;font-size:1rem;
+  color:var(--black);margin-bottom:.4rem;letter-spacing:-.01em}
+.sty-card p{font-family:'Product Sans',sans-serif;font-size:.85rem;line-height:1.6;color:var(--g500)}
+.sty-map{background:var(--tint);border-color:rgba(237,31,36,.18)}
+.sty-map .btn{margin-top:auto;align-self:flex-start}
+
+.si-link{display:inline-block;margin-top:.7rem;font-family:'Product Sans',sans-serif;
+  font-size:.82rem;font-weight:700;color:var(--red);cursor:pointer;text-decoration:none}
+.si-link:hover{text-decoration:underline}
+
+@media(max-width:880px){.sty-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.sty-grid{grid-template-columns:1fr}}
