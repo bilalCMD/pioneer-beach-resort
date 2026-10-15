@@ -11,7 +11,7 @@
 
 /* Map a page slug to its HTML file. 'home' is index.html. */
 /* Bump on deploy so browsers pick up new partials instead of a cached copy. */
-const ASSET_V='20261014b';
+const ASSET_V='20261015a';
 
 function pageUrl(p){ return (p === 'home' || !p) ? '/' : '/' + p; }
 
@@ -168,7 +168,8 @@ function initFeatureModal(){
         '<button class="rfm-close" type="button" aria-label="Close">&#10005;</button>' +
         '<figure class="rfm-figure" hidden><img alt=""></figure>' +
         '<div class="rfm-body"><span class="rfm-tag" hidden></span><h3></h3>' +
-        '<div class="rfm-content"></div></div>' +
+        '<div class="rfm-content"></div>' +
+        '<div class="rfm-strip" hidden></div></div>' +
       '</div>';
     document.body.appendChild(overlay);
   }
@@ -179,6 +180,7 @@ function initFeatureModal(){
   const tagEl   = overlay.querySelector('.rfm-tag');
   const titleEl = overlay.querySelector('.rfm-body h3');
   const content = overlay.querySelector('.rfm-content');
+  const strip   = overlay.querySelector('.rfm-strip');
   let lastFocus = null;
 
   function open(tile){
@@ -200,6 +202,27 @@ function initFeatureModal(){
     titleEl.innerHTML = h ? h.innerHTML : '';
     overlay.setAttribute('aria-label', (h ? h.textContent : 'Resort feature').trim());
     content.innerHTML = detail.innerHTML;
+
+    /* Photo strip: the tile names a folder and how many shots are in it.
+       Thumbnails are built here so nothing downloads until this opens. */
+    const folder = tile.getAttribute('data-gallery');
+    const shots  = parseInt(tile.getAttribute('data-shots') || '0', 10);
+    if(folder && shots > 0){
+      let html = '';
+      for(let i = 1; i <= shots; i++){
+        const n = String(i).padStart(2, '0');
+        const full = 'assets/img/gallery/' + folder + '/' + n + '.jpg';
+        html += '<button type="button" class="rfm-thumb" data-full="' + full + '">' +
+                  '<img src="assets/img/gallery/' + folder + '/' + n + '_t.jpg" alt="" loading="lazy">' +
+                '</button>';
+      }
+      strip.innerHTML = '<p class="rfm-striplabel">' + shots + ' photos</p>' +
+                        '<div class="rfm-thumbs">' + html + '</div>';
+      strip.hidden = false;
+    } else {
+      strip.hidden = true;
+      strip.innerHTML = '';
+    }
 
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -223,7 +246,17 @@ function initFeatureModal(){
     });
   });
 
-  overlay.addEventListener('click', e => { if(e.target === overlay) close(); });
+  overlay.addEventListener('click', e => {
+    const thumb = e.target.closest('.rfm-thumb');
+    if(thumb){
+      figImg.src = thumb.getAttribute('data-full');
+      figure.hidden = false;
+      strip.querySelectorAll('.rfm-thumb').forEach(t => t.classList.toggle('active', t === thumb));
+      figure.scrollIntoView({block:'nearest', behavior:'smooth'});
+      return;
+    }
+    if(e.target === overlay) close();
+  });
   overlay.querySelector('.rfm-close').addEventListener('click', close);
   document.addEventListener('keydown', e => {
     if(e.key === 'Escape' && overlay.classList.contains('open')) close();
