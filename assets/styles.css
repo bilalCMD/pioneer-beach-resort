@@ -1624,3 +1624,44 @@ img,svg,video,iframe{max-width:100%}
 #page-faqs .page-hero{background-image:url('img/hero/page-faqs.jpg')}
 #page-activities .page-hero{background-image:url('img/hero/page-activities.jpg')}
 @media(max-width:760px){.page-hero::after{background:linear-gradient(180deg,rgba(8,18,32,.72),rgba(8,18,32,.55))}}
+
+
+/* ============================================================
+   CONTACT PAGE
+   The cu2-* blocks referenced --r, --ink, --shd and friends, but
+   those were only ever defined on #page-explore .cu and on the
+   promotions page. Outside that scope they resolved to nothing, so
+   the Send Message button rendered transparent and the cards lost
+   their shadows. Define them on the page itself.
+   ============================================================ */
+#page-explore{
+  --r:var(--red);--rh:var(--red-hover);--rg:var(--red-glow);
+  --ink:#16181D;--g7:var(--g700);--g5:#8a8a8a;--g3:var(--g300);
+  --g2:#EAE6E0;--g1:#F3EFE9;
+  --shd:0 18px 50px rgba(20,24,29,.08);--shdsm:0 8px 24px rgba(20,24,29,.06);
+}
+
+/* Hero: a photograph rather than a flat gradient. */
+#page-explore .cu2-hero{
+  position:relative;overflow:hidden;
+  background:#0d1a2b url('img/hero/page-explore.jpg') center 45%/cover no-repeat}
+#page-explore .cu2-hero::before{content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(8,18,32,.78) 0%,rgba(8,18,32,.58) 55%,rgba(8,18,32,.72) 100%)}
+#page-explore .cu2-hero-in{position:relative;z-index:2}
+
+/* The form sat in a pink panel inside a white card - one surface is enough. */
+#page-explore .cu-form{background:transparent;border:none;box-shadow:none;padding:0}
+
+/* Resort Details was solid black against an otherwise light page. */
+#page-explore .cu2-detailcard{
+  background:var(--tint);color:var(--black);
+  border:1px solid rgba(237,31,36,.14);box-shadow:var(--shdsm)}
+#page-explore .cu2-detailcard h3{color:var(--black)}
+#page-explore .cu2-dic{background:#fff;color:var(--red);border:1px solid rgba(237,31,36,.14)}
+#page-explore .cu2-drow{border-top-color:rgba(20,24,29,.10)}
+#page-explore .cu2-drow h4{color:var(--black)}
+#page-explore .cu2-drow p{color:var(--g700)}
+#page-explore .cu2-drow a{color:var(--red)}
+
+/* Book Now was a full-width slab; match the other buttons. */
+#page-explore .cu2-book{box-shadow:0 10px 26px -10px var(--red-glow)}
