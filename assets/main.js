@@ -11,7 +11,7 @@
 
 /* Map a page slug to its HTML file. 'home' is index.html. */
 /* Bump on deploy so browsers pick up new partials instead of a cached copy. */
-const ASSET_V='20261020a';
+const ASSET_V='20261020b';
 
 function pageUrl(p){ return (p === 'home' || !p) ? '/' : '/' + p; }
 
@@ -71,6 +71,7 @@ function revealGallery(){const items=document.querySelectorAll('.gallery-masonry
 
 const lbSrc={img1:'stpat',img2:'boardwalk_beach',img3:'kite',img4:'park_pond',img5:'egrets',img6:'sunset_wide',img7:'sunset_ships',img8:'potluck',img9:'aerial',img10:'moorhen',img11:'park_gulf',img12:'park_dusk'};
 function openLightbox(k,c){document.getElementById('lightboxImg').src=(window.IMG&&IMG[lbSrc[k]])||'';document.getElementById('lightboxCaption').textContent=c||'';document.getElementById('lightbox').classList.add('open')}
+function openPhoto(src,c){document.getElementById('lightboxImg').src=src;document.getElementById('lightboxCaption').textContent=c||'';document.getElementById('lightbox').classList.add('open')}
 function closeLightbox(e){if(e.target.id==='lightbox'||e.target.classList.contains('lightbox-close'))document.getElementById('lightbox').classList.remove('open')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lightbox').classList.remove('open')});
 
