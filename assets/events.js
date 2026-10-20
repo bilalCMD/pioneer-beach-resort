@@ -143,6 +143,12 @@
     document.querySelectorAll('.ev-tab').forEach(b =>
       b.addEventListener('click', () => switchView(b.dataset.view)));
 
+    /* rows are rebuilt on every render, so delegate rather than bind */
+    document.addEventListener('click', e => {
+      const im = e.target.closest && e.target.closest('.ev-img img');
+      if (im && typeof window.openPhoto === 'function') openPhoto(im.src, im.alt);
+    });
+
     const prev = document.getElementById('evCalPrev');
     const next = document.getElementById('evCalNext');
     if (prev) prev.addEventListener('click', () => { calDate.setMonth(calDate.getMonth() - 1); renderCalendar(); });

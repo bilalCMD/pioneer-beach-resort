@@ -1799,3 +1799,20 @@ nav#navbar .nav-left>li>a,nav#navbar .nav-left>li>span{white-space:nowrap}
   .ev-gal{grid-template-columns:1fr}
   .ev-shot-big{grid-column:span 1}
 }
+
+/* ------------------------------------------------------------
+   EVENT ROW THUMBNAILS
+   The card aligns to the top, so a fixed 100px thumbnail left a
+   gap beneath it. It fills the row now, and 200px is wide enough
+   for the photograph to read at a glance.
+   ------------------------------------------------------------ */
+@media(min-width:721px){
+  .ev-card:has(.ev-img){grid-template-columns:92px 1fr 200px}
+  .ev-img{align-self:stretch}
+  .ev-img img{height:100%;min-height:118px}
+}
+.ev-img{cursor:pointer}
+@media(max-width:720px){
+  .ev-img{align-self:auto;grid-column:1/-1}
+  .ev-img img{height:150px;min-height:0}
+}

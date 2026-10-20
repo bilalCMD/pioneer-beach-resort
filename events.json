@@ -9,7 +9,7 @@
       "time": "7:00 PM",
       "location": "Rec Hall",
       "description": "Cards on sale from 6:30pm. Cash prizes and a jackpot game to finish.",
-      "image": "",
+      "image": "assets/img/ev/row-bingo.jpg",
       "status": "scheduled",
       "statusNote": ""
     },
@@ -21,7 +21,7 @@
       "time": "5:30 PM",
       "location": "Rec Hall",
       "description": "A different menu each week, cooked and served by our Winter Texan volunteers.",
-      "image": "",
+      "image": "assets/img/ev/row-dinner.jpg",
       "status": "scheduled",
       "statusNote": ""
     },
@@ -33,7 +33,7 @@
       "time": "10:00 AM",
       "location": "Activity Center",
       "description": "All materials supplied. Beginners welcome, no need to book ahead.",
-      "image": "",
+      "image": "assets/img/ev/row-pottery.jpg",
       "status": "scheduled",
       "statusNote": ""
     },
@@ -45,7 +45,7 @@
       "time": "4:00 PM",
       "location": "Pavilion & Activity Center",
       "description": "Site decorating contest, trick-or-treating around the park and a costume party at the pavilion.",
-      "image": "",
+      "image": "assets/img/ev/row-halloween.jpg",
       "status": "scheduled",
       "statusNote": ""
     },
@@ -57,7 +57,7 @@
       "time": "1:00 PM",
       "location": "Rec Hall",
       "description": "Turkey provided by the resort. Bring a dish to share and join your neighbours.",
-      "image": "",
+      "image": "assets/img/ev/row-thanksgiving.jpg",
       "status": "scheduled",
       "statusNote": ""
     },
@@ -69,7 +69,7 @@
       "time": "8:00 PM",
       "location": "Rec Hall",
       "description": "Live music, snacks and a countdown to midnight.",
-      "image": "",
+      "image": "assets/img/ev/row-newyear.jpg",
       "status": "scheduled",
       "statusNote": ""
     },
@@ -82,7 +82,7 @@
       "time": "",
       "location": "",
       "description": "Monthly rates for stays of 30 nights or longer through the winter season. Call the office for current availability.",
-      "image": "",
+      "image": "assets/img/ev/row-promo_winter.jpg",
       "status": "scheduled",
       "statusNote": ""
     }

@@ -11,7 +11,7 @@
 
 /* Map a page slug to its HTML file. 'home' is index.html. */
 /* Bump on deploy so browsers pick up new partials instead of a cached copy. */
-const ASSET_V='20261020b';
+const ASSET_V='20261020c';
 
 function pageUrl(p){ return (p === 'home' || !p) ? '/' : '/' + p; }
 
