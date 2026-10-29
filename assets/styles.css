@@ -1742,37 +1742,34 @@ nav#navbar .nav-left>li>a:hover,nav#navbar .nav-left>li>span:hover{color:#fff}
 
 /* ------------------------------------------------------------
    NAVBAR FIT
-   The logo was absolutely centred, so between the hamburger
-   breakpoint and about 1200px the links ran straight over it.
-   It now rides in the flow with auto margins, which centres it in
-   the gap the links and actions leave and can never collide.
+   The logo belongs in the true centre of the bar, which only works
+   while the six links fit inside half of (viewport - logo). Measured:
+   they need 617px at full size and 502px once the type steps down, so
+   the type steps down below 1500px and the mobile menu takes over
+   below 1120px, where even the stepped-down links would reach the
+   middle.
    ------------------------------------------------------------ */
 nav#navbar{gap:1rem}
 nav#navbar .nav-left{flex:0 1 auto;min-width:0}
-nav#navbar .nav-logo{position:static;transform:none;flex:0 0 auto;margin:0 auto}
 nav#navbar .nav-actions{flex:0 1 auto;min-width:0;justify-content:flex-end}
-@media(max-width:1180px){
-  nav#navbar .nav-left>li>a,nav#navbar .nav-left>li>span{padding:.5rem .55rem;font-size:var(--fs-2xs)}
+nav#navbar .nav-logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0}
+nav#navbar .nav-left>li>a,nav#navbar .nav-left>li>span{white-space:nowrap}
+@media(max-width:1499px){
+  nav#navbar{padding:0 1.2rem}
+  nav#navbar .nav-left>li>a,nav#navbar .nav-left>li>span{padding:.5rem .5rem;font-size:var(--fs-2xs)}
   nav#navbar .nav-logo img{height:34px}
   .nav-btn{padding:.5rem .8rem;font-size:var(--fs-2xs)}
   .nav-actions{gap:.5rem}
-  #navbar .nav-left>li>a:not(.current)::after{left:.55rem;right:.55rem}
+  #navbar .nav-left>li>a:not(.current)::after{left:.5rem;right:.5rem}
 }
-/* below this the second action stops fitting; it lives in the mobile
-   menu and the footer too, so the primary one keeps the space */
-@media(max-width:1000px){
-  .nav-actions .nav-btn+.nav-btn{display:none}
-}
-/* six links, a logo and an action stop fitting below this, so the
-   mobile menu takes over earlier than it used to (was 880px) */
-@media(max-width:960px){
+/* at 1120px "Find Us" already touches the centred logo, so the mobile
+   menu takes over just above that. The logo stays centred there too -
+   only the hamburger shares the bar with it. */
+@media(max-width:1129px){
   nav#navbar .nav-left,nav#navbar .nav-actions{display:none}
-  nav#navbar{justify-content:space-between;padding:0 1.2rem}
-  nav#navbar .nav-logo{position:static;transform:none}
+  nav#navbar{justify-content:flex-end;padding:0 1.2rem}
   .hamburger{display:flex}
 }
-/* let a label shrink the bar, never wrap to two lines */
-nav#navbar .nav-left>li>a,nav#navbar .nav-left>li>span{white-space:nowrap}
 
 
 /* ------------------------------------------------------------
@@ -1816,3 +1813,28 @@ nav#navbar .nav-left>li>a,nav#navbar .nav-left>li>span{white-space:nowrap}
   .ev-img{align-self:auto;grid-column:1/-1}
   .ev-img img{height:150px;min-height:0}
 }
+
+
+/* ------------------------------------------------------------
+   HOME HERO COLLAGE
+   The hero was one photograph behind the headline. It is a wall
+   of eight now, which is what Austin asked for; the gradient and
+   the headline shadows carry on doing the readability work, so
+   nothing above this layer had to change.
+   ------------------------------------------------------------ */
+.home-hero-photo.is-collage{background-image:none;animation:none;
+  display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr)}
+.home-hero-photo.is-collage img{width:100%;height:100%;object-fit:cover;display:block;
+  min-width:0;min-height:0}
+/* the tiles would read as a contact sheet without this: a hairline of
+   the hero's own navy between them reads as one picture wall */
+.home-hero-photo.is-collage img{outline:1px solid rgba(8,18,32,.5);outline-offset:-1px}
+@media(max-width:820px){
+  .home-hero-photo.is-collage{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,1fr)}
+}
+/* eight bright photographs under white type need a real scrim; the single
+   hero photo was dark enough on its own that the old gradient sufficed */
+.home-hero-photo.is-collage::after{
+  background:
+    radial-gradient(95% 62% at 50% 40%,rgba(5,14,28,.74) 0%,rgba(5,14,28,.42) 58%,rgba(5,14,28,.12) 100%),
+    linear-gradient(180deg,rgba(5,14,28,.70) 0%,rgba(5,14,28,.46) 38%,rgba(5,14,28,.42) 66%,rgba(5,14,28,.66) 100%)}
