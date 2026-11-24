@@ -349,7 +349,7 @@ nav .nav-actions{display:flex;gap:.7rem;align-items:center}
 .home-hero-btn.map:hover{background:#fff;border-color:#fff;color:var(--red-hover);transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,45,95,.3)}
 .home-hero-btn.map svg{flex-shrink:0}
 /* ---- SCROLL CUE ---- */
-.hero-scroll{position:relative;z-index:5;margin-top:auto;margin-bottom:clamp(1.1rem,3.5vh,2.4rem);display:flex;flex-direction:column;align-items:center;gap:.55rem;text-decoration:none;color:#fff;font-family:'Product Sans',sans-serif;font-size:var(--fs-3xs);font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,45,95,.45);opacity:.92;transition:opacity .3s;animation:fadeUp 1s .8s cubic-bezier(.16,1,.3,1) both}}
+.hero-scroll{position:relative;z-index:5;margin-top:auto;margin-bottom:clamp(1.1rem,3.5vh,2.4rem);display:flex;flex-direction:column;align-items:center;gap:.55rem;text-decoration:none;color:#fff;font-family:'Product Sans',sans-serif;font-size:var(--fs-3xs);font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,45,95,.45);opacity:.92;transition:opacity .3s;animation:fadeUp 1s .8s cubic-bezier(.16,1,.3,1) both}
 .hero-scroll:hover{opacity:1}
 .hero-scroll-arrow{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:heroScrollBob 1.9s ease-in-out infinite}
 @keyframes heroScrollBob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
@@ -1618,7 +1618,6 @@ img,svg,video,iframe{max-width:100%}
 #page-cottages .page-hero{background-image:url('img/hero/page-cottages.jpg')}
 #page-events .page-hero{background-image:url('img/hero/page-events.jpg')}
 #page-gallery .page-hero{background-image:url('img/hero/page-gallery.jpg')}
-#page-map .page-hero{background-image:url('img/hero/page-map.jpg')}
 #page-things-to-do .page-hero{background-image:url('img/hero/page-things-to-do.jpg')}
 #page-contact .page-hero{background-image:url('img/hero/page-contact.jpg')}
 #page-faqs .page-hero{background-image:url('img/hero/page-faqs.jpg')}
@@ -1741,36 +1740,124 @@ nav#navbar .nav-left>li>a:hover,nav#navbar .nav-left>li>span:hover{color:#fff}
 #page-things-to-do .page-hero{background-image:url('img/hero/page-things-to-do.jpg')}
 
 /* ------------------------------------------------------------
-   NAVBAR FIT
-   The logo belongs in the true centre of the bar, which only works
-   while the six links fit inside half of (viewport - logo). Measured:
-   they need 617px at full size and 502px once the type steps down, so
-   the type steps down below 1500px and the mobile menu takes over
-   below 1120px, where even the stepped-down links would reach the
-   middle.
+   NAVBAR
+   Two layouts share one partial. The live site centres the logo,
+   which works because six links fit inside half of (viewport minus
+   logo). The /demo page follows Scott's mockup: logo at the left,
+   links beside it, which is the only way the seventh link ("Beach
+   Carts") fits. Breakpoints below come from measuring both.
    ------------------------------------------------------------ */
 nav#navbar{gap:1rem}
 nav#navbar .nav-left{flex:0 1 auto;min-width:0}
 nav#navbar .nav-actions{flex:0 1 auto;min-width:0;justify-content:flex-end}
-nav#navbar .nav-logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0}
 nav#navbar .nav-left>li>a,nav#navbar .nav-left>li>span{white-space:nowrap}
+
+/* ---- live: logo pinned to the centre of the bar ---- */
+body:not(.demo-shell) nav#navbar .nav-logo{position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);margin:0}
 @media(max-width:1499px){
-  nav#navbar{padding:0 1.2rem}
-  nav#navbar .nav-left>li>a,nav#navbar .nav-left>li>span{padding:.5rem .5rem;font-size:var(--fs-2xs)}
-  nav#navbar .nav-logo img{height:34px}
-  .nav-btn{padding:.5rem .8rem;font-size:var(--fs-2xs)}
-  .nav-actions{gap:.5rem}
-  #navbar .nav-left>li>a:not(.current)::after{left:.5rem;right:.5rem}
+  body:not(.demo-shell) nav#navbar{padding:0 1.2rem}
+  body:not(.demo-shell) nav#navbar .nav-left>li>a,
+  body:not(.demo-shell) nav#navbar .nav-left>li>span{padding:.5rem .5rem;font-size:var(--fs-2xs)}
+  body:not(.demo-shell) nav#navbar .nav-logo img{height:34px}
+  body:not(.demo-shell) .nav-btn{padding:.5rem .8rem;font-size:var(--fs-2xs)}
+  body:not(.demo-shell) .nav-actions{gap:.5rem}
+  body:not(.demo-shell) #navbar .nav-left>li>a:not(.current)::after{left:.5rem;right:.5rem}
 }
-/* at 1120px "Find Us" already touches the centred logo, so the mobile
-   menu takes over just above that. The logo stays centred there too -
-   only the hamburger shares the bar with it. */
 @media(max-width:1129px){
-  nav#navbar .nav-left,nav#navbar .nav-actions{display:none}
-  nav#navbar{justify-content:flex-end;padding:0 1.2rem}
-  .hamburger{display:flex}
+  body:not(.demo-shell) nav#navbar .nav-left,
+  body:not(.demo-shell) nav#navbar .nav-actions{display:none}
+  body:not(.demo-shell) nav#navbar{justify-content:flex-end;padding:0 1.2rem}
+  body:not(.demo-shell) .hamburger{display:flex}
 }
 
+/* ---- /demo: Scott's header, logo at the left ---- */
+body.demo-shell nav#navbar{justify-content:flex-start}
+body.demo-shell nav#navbar .nav-logo{position:static;transform:none;left:auto;top:auto;
+  margin:0;flex:0 0 auto;order:-1}
+body.demo-shell nav#navbar .nav-left{margin-left:.4rem}
+body.demo-shell nav#navbar .nav-actions{flex:0 0 auto;margin-left:auto}
+@media(max-width:1279px){
+  body.demo-shell nav#navbar{padding:0 1.2rem}
+  body.demo-shell nav#navbar .nav-left>li>a,
+  body.demo-shell nav#navbar .nav-left>li>span{padding:.5rem .45rem;font-size:var(--fs-2xs)}
+  body.demo-shell nav#navbar .nav-logo img{height:34px}
+  body.demo-shell .nav-btn{padding:.5rem .8rem;font-size:var(--fs-2xs)}
+  body.demo-shell .nav-actions{gap:.5rem}
+  body.demo-shell #navbar .nav-left>li>a:not(.current)::after{left:.45rem;right:.45rem}
+}
+@media(max-width:1069px){
+  body.demo-shell nav#navbar .nav-left,
+  body.demo-shell nav#navbar .nav-actions{display:none}
+  body.demo-shell nav#navbar{justify-content:space-between;padding:0 1.2rem}
+  body.demo-shell .hamburger{display:flex}
+}
+
+/* ============================================================
+   HOME PAGE, Scott's notes of 24 November
+   The collage became a slideshow, which is what he asked for and
+   also fixes Austin's note that the stills "appear blue": eight
+   bright photographs under one scrim had to be dimmed so far that
+   the colour went. One photograph at a time needs far less.
+   ============================================================ */
+.home-hero-photo.is-slides{background-image:none;animation:none}
+.home-hero-photo.is-slides img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:0;transition:opacity 1.5s ease}
+.home-hero-photo.is-slides img.on{opacity:1}
+.home-hero-photo.is-slides img.on.kb{animation:heroZoom 13s ease-out forwards}
+/* light enough to keep the photograph's colour, dark enough under the type */
+.home-hero-photo.is-slides::after{
+  background:
+    radial-gradient(72% 56% at 50% 40%,rgba(5,14,28,.50) 0%,rgba(5,14,28,.22) 62%,rgba(5,14,28,0) 100%),
+    linear-gradient(180deg,rgba(5,14,28,.46) 0%,rgba(5,14,28,.16) 30%,rgba(5,14,28,.12) 56%,rgba(5,14,28,.50) 100%)}
+@media(prefers-reduced-motion:reduce){
+  .home-hero-photo.is-slides img{transition:none}
+  .home-hero-photo.is-slides img.on.kb{animation:none}
+}
+
+.home-hero-tag{font-family:'Product Sans',sans-serif;font-size:var(--fs-lg);font-weight:600;
+  color:#fff;margin-top:.8rem;text-shadow:0 1px 3px rgba(5,15,28,.7),0 2px 16px rgba(5,15,28,.55)}
+.home-hero-sub{margin-top:1rem}
+.home-hero-rating{display:inline-flex;align-items:center;justify-content:center;margin-top:1.6rem;
+  background:rgba(255,255,255,.95);border-radius:var(--btn-r);padding:.5rem 1.1rem;
+  box-shadow:0 10px 28px rgba(0,45,95,.26)}
+.home-hero-rating img{display:block;height:28px;width:auto}
+@media(max-width:600px){
+  .home-hero-tag{font-size:var(--fs-sm)}
+  .home-hero-rating{margin-top:1.1rem;padding:.4rem .85rem}
+  .home-hero-rating img{height:22px}
+}
+
+/* ---- One Resort. Every Season. ---- */
+.season-section{background:var(--g100)}
+.season-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));
+  gap:clamp(1.1rem,2.2vw,1.8rem)}
+.season-card{background:var(--white);border:1px solid var(--g200);border-radius:18px;
+  overflow:hidden;display:flex;flex-direction:column;min-width:0;
+  transition:transform .32s cubic-bezier(.16,1,.3,1),box-shadow .32s ease}
+.season-card:hover{transform:translateY(-6px);box-shadow:0 22px 46px -14px rgba(20,20,20,.22)}
+.season-media{aspect-ratio:45/31;overflow:hidden;background:var(--g100)}
+.season-media img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.season-card:hover .season-media img{transform:scale(1.05)}
+.season-body{padding:1.35rem 1.4rem 1.6rem;display:flex;flex-direction:column;gap:.6rem}
+.season-body h3{font-family:'Cinzel Decorative','Cinzel',serif;font-weight:400;
+  font-size:var(--fs-h3);color:var(--black);line-height:1.2}
+.season-body p{font-family:'Product Sans',sans-serif;font-size:var(--fs-sm);line-height:1.68;
+  color:var(--g700)}
+.season-link{font-family:'Product Sans',sans-serif;font-size:var(--fs-sm);font-weight:700;
+  color:var(--red);cursor:pointer;margin-top:auto;align-self:flex-start}
+.season-link:hover{color:var(--red-hover)}
+
+/* ---- Mustang Beach Carts lockup ---- */
+.gcr-brand{display:block;margin-bottom:.9rem}
+.gcr-brand img{display:block;height:74px;width:auto}
+
+/* ---- Facebook: two pages ---- */
+.fbc-eyebrow-lg{font-size:var(--fs-sm);letter-spacing:.14em;padding:.5rem 1.2rem}
+.fbc-btn-alt{background:var(--white);color:var(--red);border:1.5px solid var(--red);
+  box-shadow:none;margin-top:.7rem}
+.fbc-btn-alt:hover{background:var(--tint);color:var(--red-hover)}
 
 /* ------------------------------------------------------------
    EVENTS GALLERY
@@ -1836,5 +1923,87 @@ nav#navbar .nav-left>li>a,nav#navbar .nav-left>li>span{white-space:nowrap}
    hero photo was dark enough on its own that the old gradient sufficed */
 .home-hero-photo.is-collage::after{
   background:
-    radial-gradient(95% 62% at 50% 40%,rgba(5,14,28,.74) 0%,rgba(5,14,28,.42) 58%,rgba(5,14,28,.12) 100%),
-    linear-gradient(180deg,rgba(5,14,28,.70) 0%,rgba(5,14,28,.46) 38%,rgba(5,14,28,.42) 66%,rgba(5,14,28,.66) 100%)}
+    radial-gradient(78% 56% at 50% 40%,rgba(5,14,28,.56) 0%,rgba(5,14,28,.26) 60%,rgba(5,14,28,.04) 100%),
+    linear-gradient(180deg,rgba(5,14,28,.50) 0%,rgba(5,14,28,.22) 34%,rgba(5,14,28,.18) 62%,rgba(5,14,28,.52) 100%)}
+/* the Mustang logo stands in for the section label on /demo, so it needs
+   the label's weight rather than a thumbnail's */
+/* two Facebook pages, side by side; the public one is the quieter of the two */
+.fbc-btns{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;align-items:center}
+#page-home .fbc-btn.fbc-btn-alt{background:var(--white);color:var(--red);
+  border:1.5px solid var(--red);box-shadow:none;margin-top:0}
+#page-home .fbc-btn.fbc-btn-alt:hover{background:var(--tint);color:var(--red-hover);
+  box-shadow:0 12px 26px -12px rgba(237,31,36,.4)}
+/* .section-desc is capped at 600px but never centred, so inside a centred
+   block its text sat against the left edge of the container. The left-aligned
+   intros (amenities, activities) are outside .text-center and keep their own
+   alignment. */
+.text-center .section-desc{margin-left:auto;margin-right:auto}
+
+
+/* ---- Why Guests Choose Pioneer ----
+   Rebuilt: the items were emoji, and icons.js only carries SVG for some
+   of them, so half the row came out as colour emoji. Inline SVG keeps the
+   set consistent, and each item is a tile rather than floating in one
+   large empty panel. */
+.wgc-section{background:var(--white)}
+.wgc-grid{display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(.9rem,1.8vw,1.3rem);margin-top:clamp(1.6rem,3vw,2.4rem)}
+.wgc-item{display:flex;flex-direction:column;align-items:flex-start;gap:.7rem;min-width:0;
+  background:var(--tint);border:1px solid rgba(237,31,36,.14);border-radius:16px;
+  padding:clamp(1.1rem,2vw,1.5rem);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,border-color .3s ease}
+.wgc-item:hover{transform:translateY(-4px);border-color:transparent;
+  box-shadow:0 18px 38px -18px rgba(20,20,20,.26)}
+.wgc-ico{display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:48px;height:48px;border-radius:14px;background:var(--white);color:var(--red);
+  box-shadow:0 6px 16px -8px rgba(237,31,36,.45)}
+.wgc-ico svg{width:24px;height:24px;display:block}
+.wgc-lbl{font-family:'Product Sans',sans-serif;font-size:var(--fs-md);font-weight:700;
+  color:var(--black);line-height:1.35}
+.wgc-sub{font-family:'Product Sans',sans-serif;font-size:var(--fs-xs);line-height:1.55;
+  color:var(--g700)}
+.wgc-foot{display:flex;justify-content:center;margin-top:clamp(1.6rem,3vw,2.4rem)}
+@media(max-width:900px){.wgc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.wgc-grid{grid-template-columns:1fr}}
+
+
+/* ---- On-Site Golf Cart Rentals, /demo ----
+   The logo sat above the heading at a size where its own strapline was
+   unreadable, the points floated on the tint, and the lead button was a
+   faded "coming soon" that read as broken rather than pending. */
+body.demo-shell .gcr-wrap{align-items:stretch}
+body.demo-shell .gcr-media{display:flex}
+body.demo-shell .gcr-media img{height:100%;min-height:clamp(300px,38vw,460px)}
+body.demo-shell .gcr-text{display:flex;flex-direction:column;justify-content:center}
+
+body.demo-shell .gcr-brand{display:inline-flex;align-items:center;gap:.8rem;
+  margin-bottom:1.1rem;background:var(--white);border:1px solid rgba(237,31,36,.14);
+  border-radius:14px;padding:.55rem .95rem .55rem .7rem;
+  box-shadow:0 10px 26px -18px rgba(20,20,20,.4)}
+body.demo-shell .gcr-brand img{height:46px;width:auto;display:block}
+body.demo-shell .gcr-brand-txt{display:flex;flex-direction:column;line-height:1.25}
+body.demo-shell .gcr-brand-txt em{font-style:normal;font-family:'Product Sans',sans-serif;
+  font-size:var(--fs-3xs);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--g500)}
+body.demo-shell .gcr-brand-txt strong{font-family:'Product Sans',sans-serif;
+  font-size:var(--fs-sm);font-weight:700;color:var(--black)}
+
+body.demo-shell .gcr-points{gap:.7rem}
+body.demo-shell .gcr-point{background:var(--white);border:1px solid rgba(237,31,36,.12);
+  border-radius:14px;padding:.85rem 1rem;align-items:center;
+  transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s ease}
+body.demo-shell .gcr-point:hover{transform:translateX(3px);
+  box-shadow:0 14px 30px -18px rgba(20,20,20,.3)}
+body.demo-shell .gcr-ico{background:var(--tint);border-color:transparent}
+
+body.demo-shell .gcr-actions{align-items:center;gap:.9rem}
+body.demo-shell .gcr-soon{font-family:'Product Sans',sans-serif;font-size:var(--fs-2xs);
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);
+  background:var(--white);border:1px dashed rgba(237,31,36,.45);border-radius:100px;
+  padding:.45rem .9rem}
+@media(max-width:760px){
+  body.demo-shell .gcr-media img{min-height:260px}
+}
+/* the cart sits at the left of this photograph, and a tall crop centred on it
+   loses the one thing the section is about. Austin is sending a replacement. */
+body.demo-shell .gcr-media img{object-position:26% 50%}

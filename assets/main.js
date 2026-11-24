@@ -11,7 +11,7 @@
 
 /* Map a page slug to its HTML file. 'home' is index.html. */
 /* Bump on deploy so browsers pick up new partials instead of a cached copy. */
-const ASSET_V='20261029a';
+const ASSET_V='20261124a';
 
 function pageUrl(p){ return (p === 'home' || !p) ? '/' : '/' + p; }
 
@@ -69,8 +69,27 @@ function toggleFaq(e){e.parentElement.classList.toggle('open')}
 function filterGallery(c,b){document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');const items=document.querySelectorAll('.gallery-masonry .gallery-item');let n=0;items.forEach(i=>{const show=(c==='all'||i.dataset.cat===c);if(show){i.style.display='block';i.classList.remove('in');setTimeout(()=>i.classList.add('in'),20+n*45);n++}else{i.classList.remove('in');i.style.display='none'}})}
 function revealGallery(){const items=document.querySelectorAll('.gallery-masonry .gallery-item');items.forEach((i,n)=>{i.classList.remove('in');if(i.style.display!=='none')setTimeout(()=>i.classList.add('in'),60+n*55)})}
 
-const lbSrc={img1:'stpat',img2:'boardwalk_beach',img3:'kite',img4:'park_pond',img5:'egrets',img6:'sunset_wide',img7:'sunset_ships',img8:'potluck',img9:'aerial',img10:'moorhen',img11:'park_gulf',img12:'park_dusk'};
+const lbSrc={img1:'stpat',img3:'kite',img4:'park_pond',img6:'sunset_wide',img7:'sunset_ships',img8:'potluck',img10:'moorhen',img12:'park_dusk'};
 function openLightbox(k,c){document.getElementById('lightboxImg').src=(window.IMG&&IMG[lbSrc[k]])||'';document.getElementById('lightboxCaption').textContent=c||'';document.getElementById('lightbox').classList.add('open')}
+/* Hero slideshow: one photograph at a time, crossfading. Scott asked for
+   scrolling images in place of the collage; a still wall had to be dimmed
+   so hard to keep the headline readable that the colour went out of it. */
+function initHeroSlides(){
+  var wrap=document.querySelector('.home-hero-photo.is-slides');
+  if(!wrap) return;
+  var s=[].slice.call(wrap.querySelectorAll('img'));
+  if(!s.length) return;
+  s[0].classList.add('on');
+  if(s.length<2||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  s[0].classList.add('kb');
+  var i=0;
+  setInterval(function(){
+    s[i].classList.remove('on','kb');
+    i=(i+1)%s.length;
+    s[i].classList.add('on','kb');
+  },5600);
+}
+
 function openPhoto(src,c){document.getElementById('lightboxImg').src=src;document.getElementById('lightboxCaption').textContent=c||'';document.getElementById('lightbox').classList.add('open')}
 function closeLightbox(e){if(e.target.id==='lightbox'||e.target.classList.contains('lightbox-close'))document.getElementById('lightbox').classList.remove('open')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lightbox').classList.remove('open')});
@@ -266,13 +285,16 @@ function initFeatureModal(){
 
 /* Startup: load shared components, then original page init. */
 document.addEventListener('DOMContentLoaded', ()=>{
-  loadComponent('site-header', 'partials/header.html?v='+ASSET_V);
+  var hdr=document.getElementById('site-header');
+  var hdrFile=(hdr&&hdr.dataset.variant==='demo')?'partials/header-demo.html':'partials/header.html';
+  loadComponent('site-header', hdrFile+'?v='+ASSET_V);
   loadComponent('site-footer', 'partials/footer.html?v='+ASSET_V);
   if(window.iconify) window.iconify(document.body); // swap emoji -> SVG in page content
   renderCalendar();
   initFadeUps();
   initScrollFx();
   initFeatureModal();
+  initHeroSlides();
   // The old SPA revealed the gallery when you navigated to it; with
   // separate pages we trigger it here whenever the gallery is present.
   if(document.querySelector('.gallery-masonry')) setTimeout(revealGallery, 200);
