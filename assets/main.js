@@ -11,7 +11,7 @@
 
 /* Map a page slug to its HTML file. 'home' is index.html. */
 /* Bump on deploy so browsers pick up new partials instead of a cached copy. */
-const ASSET_V='20261124a';
+const ASSET_V='20261125a';
 
 function pageUrl(p){ return (p === 'home' || !p) ? '/' : '/' + p; }
 
@@ -285,9 +285,7 @@ function initFeatureModal(){
 
 /* Startup: load shared components, then original page init. */
 document.addEventListener('DOMContentLoaded', ()=>{
-  var hdr=document.getElementById('site-header');
-  var hdrFile=(hdr&&hdr.dataset.variant==='demo')?'partials/header-demo.html':'partials/header.html';
-  loadComponent('site-header', hdrFile+'?v='+ASSET_V);
+  loadComponent('site-header', 'partials/header.html?v='+ASSET_V);
   loadComponent('site-footer', 'partials/footer.html?v='+ASSET_V);
   if(window.iconify) window.iconify(document.body); // swap emoji -> SVG in page content
   renderCalendar();
