@@ -1962,3 +1962,12 @@ nav#navbar .nav-actions{flex:0 0 auto;margin-left:auto}
 /* the cart sits at the left of this photograph, and a tall crop centred on it
    loses the one thing the section is about. Austin is sending a replacement. */
 #page-home .gcr-media img{object-position:26% 50%}
+/* the scroll cue sits at the bottom on margin-top:auto, so once the hero
+   content grew (tag line plus the Good Sam badge) there was no auto space
+   left on a short viewport and the badge landed on top of the cue */
+.home-hero-inner{padding-bottom:clamp(1.6rem,4vh,2.8rem)}
+/* on a short viewport the extra bottom gap pushed the hero past the fold,
+   so the top padding gives the same amount back */
+@media(max-height:830px){
+  .home-hero-inner{padding-top:clamp(1.2rem,3.5vh,2.6rem)}
+}
